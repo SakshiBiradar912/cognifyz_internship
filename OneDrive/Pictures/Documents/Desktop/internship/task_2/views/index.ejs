@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+    <style>
+        /* Inline styling for form */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; }
+        .container { max-width: 400px; margin: 0 auto; padding: 20px; background: white; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+        .error { color: red; font-size: 0.9em; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+    </style>
+    <script>
+        function validateForm() {
+            let name = document.forms["userForm"]["name"].value;
+            let email = document.forms["userForm"]["email"].value;
+            let password = document.forms["userForm"]["password"].value;
+            let errors = [];
+
+            if (name.length < 3) errors.push("Name must be at least 3 characters long.");
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push("Enter a valid email.");
+            if (password.length < 6) errors.push("Password must be at least 6 characters.");
+
+            if (errors.length > 0) {
+                document.getElementById("errorMessages").innerHTML = errors.join("<br>");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>User Registration</h2>
+        <div id="errorMessages" class="error">
+            <% if (errors) { %>
+                <% errors.forEach(error => { %>
+                    <div><%= error %></div>
+                <% }); %>
+            <% } %>
+        </div>
+        <form name="userForm" action="/addUser" onsubmit="return validateForm()" method="POST">
+            <label>Name:</label>
+            <input type="text" name="name" value="<%= typeof name !== 'undefined' ? name : '' %>">
+            <label>Email:</label>
+            <input type="email" name="email" value="<%= typeof email !== 'undefined' ? email : '' %>">
+            <label>Password:</label>
+            <input type="password" name="password">
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+</body>
+</html>

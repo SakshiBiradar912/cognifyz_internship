@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+
+header {
+    background: #5a8dee;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav button {
+    margin: 10px;
+    padding: 10px 15px;
+    background: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background: #dcdcdc;
+}
+
+h2 {
+    text-align: center;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
